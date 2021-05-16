@@ -1,0 +1,61 @@
+#{list items:_station, as:'station'}
+
+<div class="ui inverted five cards">
+    <div class="card">
+        <div class="content">
+            <div class="header">
+                ${station.name}
+                <i class="large red marker icon"></i>
+            </div>
+            <div class="description">Lat: ${String.format("%.2f",station.lat)}</div>
+            <div class="description">lng: ${String.format("%.2f",station.lng)}</div>
+        </div>
+    </div>
+    <div class="card">
+        <div class="content">
+            <div class="header">
+                Weather
+                <i class="${station.latestWeatherIcon}"></i>
+            </div>
+            <div class="description"> ${station.latestWeather}</div>
+        </div>
+    </div>
+    <div class="card">
+        <div class="content">
+            <div class="header">
+                Temp <i class="large blue thermometer empty icon"></i>
+            </div>
+            <div class="description">${station.latestTemperature}C</div>
+            <div class="description">${station.latestFahrenheit}F</div>
+            <div class="description">Max:${station.maxTemperature}<i class="${station.temperatureTrend}"></i></div>
+            <div class="description">Min:${station.minTemperature}</div>
+        </div>
+    </div>
+    <div class="card">
+        <div class="content">
+            <div class="header">
+                Wind
+                <i class="large green wind icon"></i>
+            </div>
+            <div class="description">${station.latestWindSpeed}bft</div>
+            <div class="description">${station.compassDirection}</div>
+            <div class="description">Feels like:</div>
+            <div class="description">${station.latestWindChill}</div>
+            <div class="description">Max:${station.maxWindSpeed}<i class="${station.windSpeedTrend}"></i></div>
+            <div class="description">Min:${station.minWindSpeed}</div>
+
+        </div>
+    </div>
+    <div class="card">
+        <div class="content">
+            <div class="header">
+                Pressure
+                <i class="large orange expand arrows alternate icon"></i>
+            </div>
+            <div class="description">${station.latestPressure}hpa</div>
+            <div class="description">Max:${station.maxPressure}<i class="${station.pressureTrend}"></i></div>
+            <div class="description">Min:${station.minPressure}</div>
+        </div>
+    </div>
+</div>
+#{/list}
