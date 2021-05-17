@@ -13,7 +13,6 @@ import play.db.jpa.Model;
 @Entity
 public class Station extends Model {
 
-
   private String name;
   private double lat;
   private double lng;

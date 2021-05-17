@@ -8,7 +8,7 @@ import play.Logger;
 import play.mvc.Controller;
 import utils.StationAnalytics;
 
-import java.util.Collections;
+
 import java.util.Comparator;
 import java.util.List;
 
@@ -19,17 +19,12 @@ public class Dashboard extends Controller {
     Logger.info("Rendering Dashboard");
     Member member = Accounts.getLoggedInMember();
 
-    // Collections.sort(member.stations, Comparator.comparing(Station::getName));
-
-    // member.stations.sort(Comparator.comparing(Station::getName));
-
     member.stations.sort(Comparator.comparing(Station::getName, String.CASE_INSENSITIVE_ORDER));
 
     List<Station> stations = member.stations;
 
     for (Station station : stations) {
       Reading latestReading = null;
-      //String latestWeatherIcon = null;
       if (station.getReadings().size() > 0) {
         latestReading = station.getReadings().get(station.getReadings().size() - 1);
         Logger.info("Latest weathercode reading is: " + latestReading.code);
@@ -44,20 +39,16 @@ public class Dashboard extends Controller {
         Logger.info("Latest weather: " + station.getLatestWeather());
 
         station.setLatestFahrenheit(StationAnalytics.celciusToFahrenheit(latestReading.temperature));
-        //String.format("%.1f", station.getLatestFahrenheit());
         Logger.info("The latest fahrenheit : " + station.getLatestFahrenheit());
-
 
         station.setLatestWindSpeed(StationAnalytics.kmToBeaufort(latestReading.windSpeed));
         Logger.info("The latest windspeed : " + station.getLatestWindSpeed());
 
         station.setLatestWindChill(StationAnalytics.windChillCalculator(latestReading.temperature, latestReading.windSpeed));
-        //String.format("%.2f", station.getLatestWindChill());
         Logger.info("The windchill : " + station.getLatestWindChill());
 
         station.setCompassDirection(StationAnalytics.windDirectionCompass(latestReading.windDirection));
         Logger.info("The compass direction : " + station.getCompassDirection());
-
 
         station.setMaxTemperature(getMaxTemperature(station.getReadings()).temperature);
 
@@ -73,9 +64,6 @@ public class Dashboard extends Controller {
 
         station.setTemperatureTrend(StationAnalytics.getTemperatureTrend(station.getReadings()));
         Logger.info("Temperature trend is: " + station.getTemperatureTrend());
-
-        // station.setTemperatureTrend(StationAnalytics.getTemperatureTrend(station.getReadings()));
-        // Logger.info("Temperature trend is: " + station.getTemperatureTrend());
 
         station.setWindSpeedTrend(StationAnalytics.getWindSpeedTrend(station.getReadings()));
         Logger.info("Windspeed trend is: " + station.getWindSpeedTrend());

@@ -25,14 +25,4 @@ public class Reading extends Model {
     this.pressure = pressure;
 
   }
-/*
-  public void setDate(String date) {
-    this.date = date;
-  }
-
-  public String getDate() {
-    return date;
-  }
-
- */
 }

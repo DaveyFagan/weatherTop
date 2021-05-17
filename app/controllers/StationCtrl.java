@@ -17,7 +17,6 @@ public class StationCtrl extends Controller {
     Station station = Station.findById(id);
     Logger.info("Station id = " + id);
     Reading latestReading = null;
-    //String latestWeatherIcon = null;
     if (station.getReadings().size() > 0) {
       latestReading = station.getReadings().get(station.getReadings().size() - 1);
       Logger.info("Latest weathercode reading is: " + latestReading.code);
@@ -32,7 +31,6 @@ public class StationCtrl extends Controller {
       Logger.info("Latest weather: " + station.getLatestWeather());
 
       station.setLatestFahrenheit(StationAnalytics.celciusToFahrenheit(latestReading.temperature));
-      //String.format("%.1f", station.getLatestFahrenheit());
       Logger.info("The latest fahrenheit : " + station.getLatestFahrenheit());
 
 
@@ -40,12 +38,10 @@ public class StationCtrl extends Controller {
       Logger.info("The latest windspeed : " + station.getLatestWindSpeed());
 
       station.setLatestWindChill(StationAnalytics.windChillCalculator(latestReading.temperature, latestReading.windSpeed));
-      //String.format("%.2f", station.getLatestWindChill());
       Logger.info("The windchill : " + station.getLatestWindChill());
 
       station.setCompassDirection(StationAnalytics.windDirectionCompass(latestReading.windDirection));
       Logger.info("The compass direction : " + station.getCompassDirection());
-
 
       station.setMaxTemperature(getMaxTemperature(station.getReadings()).temperature);
 
@@ -62,9 +58,6 @@ public class StationCtrl extends Controller {
       station.setTemperatureTrend(StationAnalytics.getTemperatureTrend(station.getReadings()));
       Logger.info("Temperature trend is: " + station.getTemperatureTrend());
 
-      // station.setTemperatureTrend(StationAnalytics.getTemperatureTrend(station.getReadings()));
-      // Logger.info("Temperature trend is: " + station.getTemperatureTrend());
-
       station.setWindSpeedTrend(StationAnalytics.getWindSpeedTrend(station.getReadings()));
       Logger.info("Windspeed trend is: " + station.getWindSpeedTrend());
 
@@ -78,11 +71,6 @@ public class StationCtrl extends Controller {
 
     render("station.html", station, latestReading);
   }
-
-  public void latestReading() {
-
-  }
-
 
   public static void addReading(Long id, Date date, int code, double temperature, double windSpeed, int windDirection, int pressure) {
     Date dates = new Date(System.currentTimeMillis());
@@ -103,7 +91,6 @@ public class StationCtrl extends Controller {
     reading.delete();
 
     Reading latestReading = null;
-    //String latestWeatherIcon = null;
     if (station.getReadings().size() > 0) {
       latestReading = station.getReadings().get(station.getReadings().size() - 1);
       Logger.info("Latest weathercode reading is: " + latestReading.code);
@@ -118,7 +105,6 @@ public class StationCtrl extends Controller {
       Logger.info("Latest weather: " + station.getLatestWeather());
 
       station.setLatestFahrenheit(StationAnalytics.celciusToFahrenheit(latestReading.temperature));
-     // String.format("%.1f", station.getLatestFahrenheit());
       Logger.info("The latest fahrenheit : " + station.getLatestFahrenheit());
 
 
@@ -126,12 +112,10 @@ public class StationCtrl extends Controller {
       Logger.info("The latest windspeed : " + station.getLatestWindSpeed());
 
       station.setLatestWindChill(StationAnalytics.windChillCalculator(latestReading.temperature, latestReading.windSpeed));
-      //String.format("%.2f", station.getLatestWindChill());
       Logger.info("The windchill : " + station.getLatestWindChill());
 
       station.setCompassDirection(StationAnalytics.windDirectionCompass(latestReading.windDirection));
       Logger.info("The compass direction : " + station.getCompassDirection());
-
 
       station.setMaxTemperature(getMaxTemperature(station.getReadings()).temperature);
 
@@ -158,8 +142,6 @@ public class StationCtrl extends Controller {
       Logger.info("Latest latestWeather code is: " + latestReading.code);
       Logger.info("Latest weathericon is: " + station.getLatestWeatherIcon());
     }
-
     render("station.html", station);
   }
-
 }

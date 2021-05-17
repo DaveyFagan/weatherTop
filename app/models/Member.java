@@ -18,8 +18,6 @@ public class Member extends Model {
   @OneToMany(cascade = CascadeType.ALL)
   public List<Station> stations = new ArrayList<Station>();
 
-
-
   public void setFirstname(String firstname){
     this.firstname = firstname;
   }
