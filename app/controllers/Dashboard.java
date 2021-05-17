@@ -27,40 +27,40 @@ public class Dashboard extends Controller {
       Reading latestReading = null;
       if (station.getReadings().size() > 0) {
         latestReading = station.getReadings().get(station.getReadings().size() - 1);
-        Logger.info("Latest weathercode reading is: " + latestReading.code);
+        Logger.info("Latest weathercode reading is: " + latestReading.getCode());
 
-        station.setLatestTemperature(latestReading.temperature);
-        Logger.info("Latest temperature reading is: " + latestReading.temperature);
+        station.setLatestTemperature(latestReading.getTemperature());
+        Logger.info("Latest temperature reading is: " + latestReading.getTemperature());
 
-        station.setLatestPressure(latestReading.pressure);
-        Logger.info("Latest pressure reading is: " + latestReading.pressure);
+        station.setLatestPressure(latestReading.getPressure());
+        Logger.info("Latest pressure reading is: " + latestReading.getPressure());
 
-        station.setLatestWeather(StationAnalytics.convertWeatherCode(latestReading.code));
+        station.setLatestWeather(StationAnalytics.convertWeatherCode(latestReading.getCode()));
         Logger.info("Latest weather: " + station.getLatestWeather());
 
-        station.setLatestFahrenheit(StationAnalytics.celciusToFahrenheit(latestReading.temperature));
+        station.setLatestFahrenheit(StationAnalytics.celciusToFahrenheit(latestReading.getTemperature()));
         Logger.info("The latest fahrenheit : " + station.getLatestFahrenheit());
 
-        station.setLatestWindSpeed(StationAnalytics.kmToBeaufort(latestReading.windSpeed));
+        station.setLatestWindSpeed(StationAnalytics.kmToBeaufort(latestReading.getWindSpeed()));
         Logger.info("The latest windspeed : " + station.getLatestWindSpeed());
 
-        station.setLatestWindChill(StationAnalytics.windChillCalculator(latestReading.temperature, latestReading.windSpeed));
+        station.setLatestWindChill(StationAnalytics.windChillCalculator(latestReading.getTemperature(), latestReading.getWindSpeed()));
         Logger.info("The windchill : " + station.getLatestWindChill());
 
-        station.setCompassDirection(StationAnalytics.windDirectionCompass(latestReading.windDirection));
+        station.setCompassDirection(StationAnalytics.windDirectionCompass(latestReading.getWindDirection()));
         Logger.info("The compass direction : " + station.getCompassDirection());
 
-        station.setMaxTemperature(getMaxTemperature(station.getReadings()).temperature);
+        station.setMaxTemperature(getMaxTemperature(station.getReadings()).getTemperature());
 
-        station.setMinTemperature(getMinTemperature(station.getReadings()).temperature);
+        station.setMinTemperature(getMinTemperature(station.getReadings()).getTemperature());
 
-        station.setMaxWindSpeed(getMaxWindSpeed(station.getReadings()).windSpeed);
+        station.setMaxWindSpeed(getMaxWindSpeed(station.getReadings()).getWindSpeed());
 
-        station.setMinWindSpeed(getMinWindSpeed(station.getReadings()).windSpeed);
+        station.setMinWindSpeed(getMinWindSpeed(station.getReadings()).getWindSpeed());
 
-        station.setMaxPressure(getMaxPressure(station.getReadings()).pressure);
+        station.setMaxPressure(getMaxPressure(station.getReadings()).getPressure());
 
-        station.setMinPressure(getMinPressure(station.getReadings()).pressure);
+        station.setMinPressure(getMinPressure(station.getReadings()).getPressure());
 
         station.setTemperatureTrend(StationAnalytics.getTemperatureTrend(station.getReadings()));
         Logger.info("Temperature trend is: " + station.getTemperatureTrend());
@@ -71,8 +71,8 @@ public class Dashboard extends Controller {
         station.setPressureTrend(StationAnalytics.getPressureTrend(station.getReadings()));
         Logger.info("Pressure trend is: " + station.getPressureTrend());
 
-        station.setLatestWeatherIcon(StationAnalytics.generateWeatherIcon(latestReading.code));
-        Logger.info("Latest latestWeather code is: " + latestReading.code);
+        station.setLatestWeatherIcon(StationAnalytics.generateWeatherIcon(latestReading.getCode()));
+        Logger.info("Latest latestWeather code is: " + latestReading.getCode());
         Logger.info("Latest weathericon is: " + station.getLatestWeatherIcon());
       }
     }

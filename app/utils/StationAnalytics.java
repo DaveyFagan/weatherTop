@@ -11,8 +11,6 @@ public class StationAnalytics {
   public static HashMap<Integer, String> responseMap = new HashMap<Integer, String>();
 
   public StationAnalytics() {
-    //fillResponseMap();
-    //responseMap = new HashMap<Integer, String>();
   }
 
   static {
@@ -25,7 +23,7 @@ public class StationAnalytics {
     if (readings.size() > 0) {
       maxTemperature = readings.get(0);
       for (Reading reading : readings) {
-        if (reading.temperature > maxTemperature.temperature) {
+        if (reading.getTemperature() > maxTemperature.getTemperature()) {
           maxTemperature = reading;
         }
       }
@@ -36,18 +34,18 @@ public class StationAnalytics {
   public static String getTemperatureTrend(List<Reading> readings) {
     if (readings.size() > 0) {
       if (readings.size() > 1) {
-        if (readings.get(readings.size() - 2).temperature < readings.get(readings.size() - 1).temperature) {
+        if (readings.get(readings.size() - 2).getTemperature() < readings.get(readings.size() - 1).getTemperature()) {
           return "large blue arrow up icon";
-        } else if (readings.get(readings.size() - 2).temperature > readings.get(readings.size() - 1).temperature) {
+        } else if (readings.get(readings.size() - 2).getTemperature() > readings.get(readings.size() - 1).getTemperature()) {
           return "large blue arrow down icon";
         } else {
           return "large blue minus icon";
         }
       }
       if (readings.size() > 2) {
-        if (readings.get(readings.size() - 3).temperature < readings.get(readings.size() - 1).temperature) {
+        if (readings.get(readings.size() - 3).getTemperature() < readings.get(readings.size() - 1).getTemperature()) {
           return "large blue arrow up icon";
-        } else if (readings.get(readings.size() - 3).temperature > readings.get(readings.size() - 1).temperature) {
+        } else if (readings.get(readings.size() - 3).getTemperature() > readings.get(readings.size() - 1).getTemperature()) {
           return "large blue arrow down icon";
         } else {
           return "large blue minus icon";
@@ -60,18 +58,18 @@ public class StationAnalytics {
   public static String getWindSpeedTrend(List<Reading> readings) {
     if (readings.size() > 0) {
       if (readings.size() > 1) {
-        if (readings.get(readings.size() - 2).windSpeed < readings.get(readings.size() - 1).windSpeed) {
+        if (readings.get(readings.size() - 2).getWindSpeed() < readings.get(readings.size() - 1).getWindSpeed()) {
           return "large green arrow up icon";
-        } else if (readings.get(readings.size() - 2).windSpeed > readings.get(readings.size() - 1).windSpeed) {
+        } else if (readings.get(readings.size() - 2).getWindSpeed() > readings.get(readings.size() - 1).getWindSpeed()) {
           return "large green arrow down icon";
         } else {
           return "large green minus icon";
         }
       }
       if (readings.size() > 2) {
-        if (readings.get(readings.size() - 3).windSpeed < readings.get(readings.size() - 1).windSpeed) {
+        if (readings.get(readings.size() - 3).getWindSpeed() < readings.get(readings.size() - 1).getWindSpeed()) {
           return "large green arrow up icon";
-        } else if (readings.get(readings.size() - 3).windSpeed > readings.get(readings.size() - 1).windSpeed) {
+        } else if (readings.get(readings.size() - 3).getWindSpeed() > readings.get(readings.size() - 1).getWindSpeed()) {
           return "large green arrow down icon";
         } else {
           return "large green minus icon";
@@ -84,18 +82,18 @@ public class StationAnalytics {
   public static String getPressureTrend(List<Reading> readings) {
     if (readings.size() > 0) {
       if (readings.size() > 1) {
-        if (readings.get(readings.size() - 2).pressure < readings.get(readings.size() - 1).pressure) {
+        if (readings.get(readings.size() - 2).getPressure() < readings.get(readings.size() - 1).getPressure()) {
           return "large orange arrow up icon";
-        } else if (readings.get(readings.size() - 2).pressure > readings.get(readings.size() - 1).pressure) {
+        } else if (readings.get(readings.size() - 2).getPressure() > readings.get(readings.size() - 1).getPressure()) {
           return "large orange arrow down icon";
         } else {
           return "large orange minus icon";
         }
       }
       if (readings.size() > 2) {
-        if (readings.get(readings.size() - 3).pressure < readings.get(readings.size() - 1).pressure) {
+        if (readings.get(readings.size() - 3).getPressure() < readings.get(readings.size() - 1).getPressure()) {
           return "large orange arrow up icon";
-        } else if (readings.get(readings.size() - 3).pressure > readings.get(readings.size() - 1).pressure) {
+        } else if (readings.get(readings.size() - 3).getPressure() > readings.get(readings.size() - 1).getPressure()) {
           return "large orange arrow down icon";
         } else {
           return "large orange minus icon";
@@ -110,7 +108,7 @@ public class StationAnalytics {
     if (readings.size() > 0) {
       minTemperature = readings.get(0);
       for (Reading reading : readings) {
-        if (reading.temperature < minTemperature.temperature) {
+        if (reading.getTemperature() < minTemperature.getTemperature()) {
           minTemperature = reading;
         }
       }
@@ -123,7 +121,7 @@ public class StationAnalytics {
     if (readings.size() > 0) {
       maxWindSpeed = readings.get(0);
       for (Reading reading : readings) {
-        if (reading.windSpeed > maxWindSpeed.windSpeed) {
+        if (reading.getWindSpeed() > maxWindSpeed.getWindSpeed()) {
           maxWindSpeed = reading;
         }
       }
@@ -136,7 +134,7 @@ public class StationAnalytics {
     if (readings.size() > 0) {
       minWindSpeed = readings.get(0);
       for (Reading reading : readings) {
-        if (reading.windSpeed < minWindSpeed.windSpeed) {
+        if (reading.getWindSpeed() < minWindSpeed.getWindSpeed()) {
           minWindSpeed = reading;
         }
       }
@@ -149,7 +147,7 @@ public class StationAnalytics {
     if (readings.size() > 0) {
       maxPressure = readings.get(0);
       for (Reading reading : readings) {
-        if (reading.pressure > maxPressure.pressure) {
+        if (reading.getPressure() > maxPressure.getPressure()) {
           maxPressure = reading;
         }
       }
@@ -162,7 +160,7 @@ public class StationAnalytics {
     if (readings.size() > 0) {
       minPressure = readings.get(0);
       for (Reading reading : readings) {
-        if (reading.pressure < minPressure.pressure) {
+        if (reading.getPressure() < minPressure.getPressure()) {
           minPressure = reading;
         }
       }
@@ -314,13 +312,9 @@ public class StationAnalytics {
   return "incorrect input";
 }
 
-
   public static String generateWeatherIcon(int input) {
-    //if (responseMap != null) {
     String response = responseMap.get(input);
     return response;
-    // }
-    // return "large red marker icon";
   }
 
   public static void weatherIconResponseMap() {
@@ -341,6 +335,4 @@ public class StationAnalytics {
     responseMap.put(800, "large red bolt icon");
 
   }
-
-
 }
