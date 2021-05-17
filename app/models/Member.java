@@ -10,10 +10,10 @@ import java.util.List;
 
 @Entity
 public class Member extends Model {
-  public String firstname;
-  public String lastname;
-  public String email;
-  public String password;
+  private String firstname;
+  private String lastname;
+  private String email;
+  private String password;
 
   @OneToMany(cascade = CascadeType.ALL)
   public List<Station> stations = new ArrayList<Station>();
