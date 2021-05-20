@@ -1,24 +1,32 @@
 <form class="ui inverted red stacked segment form" action="/stations/${_station.id}/addreading" method="POST">
+    #{ifErrors}
+    <h1>Oops incorrect info…</h1>
+    #{/ifErrors}
     <div class="two fields">
         <div class="field">
             <label>Code</label>
             <input placeholder="00" type="text" name="code">
+            <span class="error">#{error 'code' /}</span>
         </div>
         <div class="field">
             <label>Temperature</label>
             <input placeholder="00.0C" type="text" name="temperature">
+            <span class="error">#{error 'temperature' /}</span>
         </div>
         <div class="field">
             <label>Wind Speed</label>
             <input placeholder="00.00kMh" type="text" name="windSpeed">
+            <span class="error">#{error 'windSpeed' /}</span>
         </div>
         <div class="field">
             <label>Wind Direction</label>
             <input placeholder="000deg" type="text" name="windDirection">
+            <span class="error">#{error 'windDirection' /}</span>
         </div>
         <div class="field">
             <label>Pressure</label>
             <input placeholder="000hPa" type="text" name="pressure">
+            <span class="error">#{error 'pressure' /}</span>
         </div>
     </div>
     <button class="ui black submit button">Submit Readings</button>

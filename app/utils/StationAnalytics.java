@@ -7,7 +7,6 @@ import java.util.*;
 
 public class StationAnalytics {
 
-
   public static HashMap<Integer, String> responseMap = new HashMap<Integer, String>();
 
   public StationAnalytics() {

@@ -1,16 +1,22 @@
 <form class="ui inverted red stacked segment form" action="/dashboard/addstation" method="POST">
+    #{ifErrors}
+    <h1>Oops…</h1>
+    #{/ifErrors}
     <div class="two fields">
         <div class="field">
             <label>Station Name</label>
             <input placeholder="Name" type="text" name="name">
+            <span class="error">#{error 'name' /}</span>
         </div>
         <div class="field">
             <label>Latitude</label>
             <input placeholder="00.00" type="text" name="lat">
+            <span class="error">#{error 'lat' /}</span>
         </div>
         <div class="field">
             <label>Longitude</label>
             <input placeholder="00.00" type="text" name="lng">
+            <span class="error">#{error 'lng' /}</span>
         </div>
     </div>
     <button class="ui black submit button">Add Station</button>

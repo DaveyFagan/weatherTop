@@ -2,9 +2,8 @@ package controllers;
 
 import models.Member;
 import play.Logger;
+import play.data.validation.Error;
 import play.mvc.Controller;
-
-
 
 public class Accounts extends Controller {
   public static void signup() {
@@ -16,6 +15,18 @@ public class Accounts extends Controller {
   }
 
   public static void register(String firstname, String lastname, String email, String password) {
+    validation.required(firstname);
+    validation.required(lastname);
+    validation.required(email);
+    validation.required(password);
+    if(validation.hasErrors()) {
+      {
+        Logger.info("Incorrect values entered");
+        params.flash();
+        validation.keep();
+        signup();
+      }
+    }
     Logger.info("Registering new user " + email);
     Member member = new Member(firstname, lastname, email, password);
     member.save();
@@ -29,6 +40,18 @@ public class Accounts extends Controller {
 
   public static void updateProfile(String firstname, String lastname, String email, String password, Long id)
   {
+    validation.required(firstname);
+    validation.required(lastname);
+    validation.required(email);
+    validation.required(password);
+    if(validation.hasErrors()) {
+       {
+         Logger.info("Incorrect values inserted");
+         params.flash();
+         validation.keep();
+        update();
+      }
+    }
     Logger.info("Updating user info: " + getLoggedInMember().id);
     Member member = getLoggedInMember();
     member.setFirstname(firstname);

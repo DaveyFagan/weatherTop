@@ -1,19 +1,29 @@
 package controllers;
 
+import models.Member;
 import models.Station;
 import models.Reading;
 import play.Logger;
+import play.data.validation.Error;
 import play.mvc.Controller;
 import utils.StationAnalytics;
 
+
 import java.util.Date;
+
 
 import static utils.StationAnalytics.*;
 
 public class StationCtrl extends Controller {
 
+  public static void stationIndex(Long id)
+  {
+      Station station = Station.findById(id);
+    render("station.html", station);
 
-  public void index(Long id) {
+  }
+
+  public static void index(Long id) {
     Station station = Station.findById(id);
     Logger.info("Station id = " + id);
     Reading latestReading = null;
@@ -73,13 +83,45 @@ public class StationCtrl extends Controller {
   }
 
   public static void addReading(Long id, Date date, int code, double temperature, double windSpeed, int windDirection, int pressure) {
-    Date dates = new Date(System.currentTimeMillis());
-    Reading reading = new Reading(dates, code, temperature, windSpeed, windDirection, pressure);
-    Station station = Station.findById(id);
-    station.getReadings().add(reading);
-    station.save();
-    Logger.info("Adding new reading");
-    redirect("/stations/" + id);
+
+    validation.required(code);
+    validation.max(code,800);
+    validation.min(code,100);
+
+    validation.required(temperature);
+    validation.max(temperature, 35.00);
+    validation.min(temperature, -25.00);
+
+    validation.required(windDirection);
+    validation.max(windDirection,360.00);
+    validation.min(windDirection,1.00);
+
+    validation.required(windSpeed);
+    validation.max(windSpeed, 117.00);
+    validation.min(windSpeed, 1.00);
+
+    validation.required(pressure);
+    validation.max(pressure,1100);
+    validation.min(pressure, 900);
+
+  if (validation.hasErrors()) {
+    {
+      Logger.info("Incorrest values inserted");
+      params.flash();
+      validation.keep();
+      index(id);
+    }
+  }
+
+  Date dates = new Date(System.currentTimeMillis());
+  Reading reading = new Reading(dates, code, temperature, windSpeed, windDirection, pressure);
+
+  Station station = Station.findById(id);
+  station.getReadings().add(reading);
+  station.save();
+  Logger.info("Adding new reading");
+  redirect("/stations/" + id);
+
   }
 
   public static void deletereading(Long id, Long readingid) {

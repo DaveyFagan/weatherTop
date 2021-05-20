@@ -1,10 +1,14 @@
 package models;
 
+import net.sf.oval.configuration.annotation.Constraints;
+import play.data.validation.Email;
+import play.data.validation.Required;
 import play.db.jpa.Model;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.OneToMany;
+import javax.validation.Constraint;
 import java.util.ArrayList;
 import java.util.List;
 

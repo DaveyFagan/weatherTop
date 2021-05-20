@@ -5,8 +5,8 @@ import models.Reading;
 import models.Station;
 
 import play.Logger;
+import play.data.validation.Error;
 import play.mvc.Controller;
-import utils.StationAnalytics;
 
 
 import java.util.Comparator;
@@ -15,6 +15,7 @@ import java.util.List;
 import static utils.StationAnalytics.*;
 
 public class Dashboard extends Controller {
+
   public static void index() {
     Logger.info("Rendering Dashboard");
     Member member = Accounts.getLoggedInMember();
@@ -35,19 +36,19 @@ public class Dashboard extends Controller {
         station.setLatestPressure(latestReading.getPressure());
         Logger.info("Latest pressure reading is: " + latestReading.getPressure());
 
-        station.setLatestWeather(StationAnalytics.convertWeatherCode(latestReading.getCode()));
+        station.setLatestWeather(convertWeatherCode(latestReading.getCode()));
         Logger.info("Latest weather: " + station.getLatestWeather());
 
-        station.setLatestFahrenheit(StationAnalytics.celciusToFahrenheit(latestReading.getTemperature()));
+        station.setLatestFahrenheit(celciusToFahrenheit(latestReading.getTemperature()));
         Logger.info("The latest fahrenheit : " + station.getLatestFahrenheit());
 
-        station.setLatestWindSpeed(StationAnalytics.kmToBeaufort(latestReading.getWindSpeed()));
+        station.setLatestWindSpeed(kmToBeaufort(latestReading.getWindSpeed()));
         Logger.info("The latest windspeed : " + station.getLatestWindSpeed());
 
-        station.setLatestWindChill(StationAnalytics.windChillCalculator(latestReading.getTemperature(), latestReading.getWindSpeed()));
+        station.setLatestWindChill(windChillCalculator(latestReading.getTemperature(), latestReading.getWindSpeed()));
         Logger.info("The windchill : " + station.getLatestWindChill());
 
-        station.setCompassDirection(StationAnalytics.windDirectionCompass(latestReading.getWindDirection()));
+        station.setCompassDirection(windDirectionCompass(latestReading.getWindDirection()));
         Logger.info("The compass direction : " + station.getCompassDirection());
 
         station.setMaxTemperature(getMaxTemperature(station.getReadings()).getTemperature());
@@ -62,16 +63,16 @@ public class Dashboard extends Controller {
 
         station.setMinPressure(getMinPressure(station.getReadings()).getPressure());
 
-        station.setTemperatureTrend(StationAnalytics.getTemperatureTrend(station.getReadings()));
+        station.setTemperatureTrend(getTemperatureTrend(station.getReadings()));
         Logger.info("Temperature trend is: " + station.getTemperatureTrend());
 
-        station.setWindSpeedTrend(StationAnalytics.getWindSpeedTrend(station.getReadings()));
+        station.setWindSpeedTrend(getWindSpeedTrend(station.getReadings()));
         Logger.info("Windspeed trend is: " + station.getWindSpeedTrend());
 
-        station.setPressureTrend(StationAnalytics.getPressureTrend(station.getReadings()));
+        station.setPressureTrend(getPressureTrend(station.getReadings()));
         Logger.info("Pressure trend is: " + station.getPressureTrend());
 
-        station.setLatestWeatherIcon(StationAnalytics.generateWeatherIcon(latestReading.getCode()));
+        station.setLatestWeatherIcon(generateWeatherIcon(latestReading.getCode()));
         Logger.info("Latest latestWeather code is: " + latestReading.getCode());
         Logger.info("Latest weathericon is: " + station.getLatestWeatherIcon());
       }
@@ -80,6 +81,21 @@ public class Dashboard extends Controller {
   }
 
   public static void addStation(String name, double lat, double lng) {
+    validation.required(name);
+    validation.required(lat);
+    validation.required(lng);
+    validation.max(lat,180);
+    validation.min(lat,-180);
+    validation.max(lng,180);
+    validation.min(lng,-180);
+    if(validation.hasErrors()) {
+       {
+         Logger.info("Incorrect values inserted");
+         params.flash();
+         validation.keep();
+         index();
+      }
+    }
     Member member = Accounts.getLoggedInMember();
     Station station = new Station(name, lat, lng);
     member.stations.add(station);

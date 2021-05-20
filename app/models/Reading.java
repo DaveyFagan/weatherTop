@@ -2,6 +2,8 @@ package models;
 
 import javax.persistence.Entity;
 
+import net.sf.oval.configuration.annotation.Constraints;
+import play.data.validation.Required;
 import play.db.jpa.Model;
 
 import java.util.Date;
@@ -9,6 +11,7 @@ import java.util.Date;
 @Entity
 
 public class Reading extends Model {
+
   private int code;
   private double temperature;
   private double windSpeed;
