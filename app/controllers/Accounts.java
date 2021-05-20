@@ -30,7 +30,7 @@ public class Accounts extends Controller {
     Logger.info("Registering new user " + email);
     Member member = new Member(firstname, lastname, email, password);
     member.save();
-    redirect("/");
+    authenticate(email,password);
   }
 
   public static void update()

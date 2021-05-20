@@ -325,7 +325,7 @@ public class StationAnalytics {
 
     responseMap.put(400, "large red cloud rain icon");
 
-    responseMap.put(500, "cloud showers heavy icon");
+    responseMap.put(500, "large red cloud showers heavy icon");
 
     responseMap.put(600, "large red cloud sun rain icon");
 
