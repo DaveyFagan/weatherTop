@@ -112,9 +112,10 @@ public class StationCtrl extends Controller {
       index(id);
     }
   }
-
+  double roundoffTemperature = Math.round(temperature * 100.0) / 100.0;
+  double roundoffWindSpeed = Math.round(windSpeed * 100.0) / 100.0;
   Date dates = new Date(System.currentTimeMillis());
-  Reading reading = new Reading(dates, code, temperature, windSpeed, windDirection, pressure);
+  Reading reading = new Reading(dates, code, roundoffTemperature, roundoffWindSpeed, windDirection, pressure);
 
   Station station = Station.findById(id);
   station.getReadings().add(reading);
