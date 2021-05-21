@@ -36,12 +36,21 @@ public class Station extends Model {
   private String temperatureTrend;
   private String windSpeedTrend;
   private String pressureTrend;
+  private String thermometerIcon;
 
   public Station(String name, double lat, double lng) {
     this.setName(name);
     this.setLat(lat);
     this.setLng(lng);
 
+  }
+
+  public String getThermometerIcon() {
+    return thermometerIcon;
+  }
+
+  public void setThermometerIcon(String thermometerIcon) {
+    this.thermometerIcon = thermometerIcon;
   }
 
   public String getPressureTrend() {

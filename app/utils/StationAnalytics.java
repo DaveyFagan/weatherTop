@@ -334,4 +334,27 @@ public class StationAnalytics {
     responseMap.put(800, "large red bolt icon");
 
   }
+
+  public static String temperatureIcon(double latestTemperature)
+  {
+    if(latestTemperature <= 7)
+    {
+      return "large blue thermometer empty icon";
+    }
+    else if(latestTemperature > 7 && latestTemperature <= 14)
+    {
+      return "large blue thermometer quarter icon";
+    }
+    else if(latestTemperature > 14 && latestTemperature <= 21)
+    {
+      return "large blue thermometer half icon";
+    }
+    else if(latestTemperature >21 && latestTemperature <= 28)
+    {
+      return "large blue thermometer three quarters icon";
+    }
+    else {
+      return "large blue thermometer full icon";
+    }
+  }
 }

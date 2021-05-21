@@ -137,6 +137,9 @@ public class StationCtrl extends Controller {
     Logger.info("Latest latestWeather code is: " + latestReading.getCode());
     Logger.info("Latest weathericon is: " + station.getLatestWeatherIcon());
 
+    station.setThermometerIcon(StationAnalytics.temperatureIcon(latestReading.getTemperature()));
+    Logger.info("Thermometer icon: " + station.getThermometerIcon());
+
     return station;
   }
 }
