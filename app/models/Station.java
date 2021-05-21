@@ -1,7 +1,13 @@
+/**
+ * The station class stores information for each station. It takes in
+ * the readings from the user and the yaml file and stores the readings
+ * in an arraylist.
+ *
+ * @Author David Fagan
+ */
+
 package models;
-
 import play.db.jpa.Model;
-
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.OneToMany;

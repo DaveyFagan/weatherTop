@@ -1,11 +1,14 @@
+/**
+ * Reading class represents all the weather readings
+ * in the weatherTop apolication.
+ *
+ * @Author David Fagan
+ */
 package models;
-
 import javax.persistence.Entity;
 
-import net.sf.oval.configuration.annotation.Constraints;
-import play.data.validation.Required;
+import org.hibernate.validator.constraints.NotBlank;
 import play.db.jpa.Model;
-
 import java.util.Date;
 
 @Entity

@@ -1,17 +1,10 @@
 package controllers;
-
-import models.Member;
 import models.Station;
 import models.Reading;
 import play.Logger;
-import play.data.validation.Error;
 import play.mvc.Controller;
 import utils.StationAnalytics;
-
-
 import java.util.Date;
-
-
 import static utils.StationAnalytics.*;
 
 public class StationCtrl extends Controller {
@@ -20,7 +13,6 @@ public class StationCtrl extends Controller {
   {
       Station station = Station.findById(id);
     render("station.html", station);
-
   }
 
   public static void index(Long id) {
@@ -29,7 +21,6 @@ public class StationCtrl extends Controller {
     if (station.getReadings().size() > 0) {
       weatherSummary(station);
     }
-
     render("station.html", station);
   }
 
@@ -68,7 +59,6 @@ public class StationCtrl extends Controller {
   station.save();
   Logger.info("Adding new reading");
   redirect("/stations/" + id);
-
   }
 
   public static void deletereading(Long id, Long readingid) {
