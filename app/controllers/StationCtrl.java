@@ -2,6 +2,7 @@ package controllers;
 import models.Station;
 import models.Reading;
 import play.Logger;
+import play.data.validation.Error;
 import play.mvc.Controller;
 import utils.StationAnalytics;
 import java.util.Date;
@@ -42,8 +43,9 @@ public class StationCtrl extends Controller {
     validation.range(pressure,900,1100);
 
   if (validation.hasErrors()) {
-    {
-      Logger.info("Incorrest values inserted");
+    for (Error error : validation.errors()) {
+      Logger.info("Incorrect values inserted");
+      System.out.println(error.message());
       params.flash();
       validation.keep();
       index(id);

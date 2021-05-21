@@ -39,7 +39,9 @@ public class Dashboard extends Controller {
     validation.required(lng);
     validation.range(lng,-180,180);
     if(validation.hasErrors()) {
+      for(Error error : validation.errors())
        {
+         System.out.println(error.message());
          Logger.info("Incorrect values inserted");
          params.flash();
          validation.keep();

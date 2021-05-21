@@ -20,7 +20,9 @@ public class Accounts extends Controller {
     validation.required(email);
     validation.required(password);
     if(validation.hasErrors()) {
+      for(Error error : validation.errors())
       {
+        System.out.println(error.message());
         Logger.info("Incorrect values entered");
         params.flash();
         validation.keep();
