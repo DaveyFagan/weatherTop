@@ -18,7 +18,6 @@ public class Member extends Model {
   private String lastname;
   private String email;
   private String password;
-
   @OneToMany(cascade = CascadeType.ALL)
   public List<Station> stations = new ArrayList<Station>();
 
