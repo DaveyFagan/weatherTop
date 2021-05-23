@@ -1,18 +1,14 @@
 package controllers;
 
 import models.Member;
-import models.Reading;
 import models.Station;
-
 import play.Logger;
 import play.data.validation.Error;
 import play.mvc.Controller;
-
+import utils.StationAnalytics;
 
 import java.util.Comparator;
 import java.util.List;
-
-import static utils.StationAnalytics.*;
 
 public class Dashboard extends Controller {
 
@@ -26,7 +22,7 @@ public class Dashboard extends Controller {
 
     for (Station station : stations) {
       if (station.getReadings().size() > 0) {
-        StationCtrl.weatherSummary(station);
+        StationAnalytics.weatherSummary(station);
       }
     }
     render("dashboard.html", stations);
@@ -35,17 +31,16 @@ public class Dashboard extends Controller {
   public static void addStation(String name, double lat, double lng) {
     validation.required(name);
     validation.required(lat);
-    validation.range(lat,-180,180);
+    validation.range(lat, -180, 180);
     validation.required(lng);
-    validation.range(lng,-180,180);
-    if(validation.hasErrors()) {
-      for(Error error : validation.errors())
-       {
-         System.out.println(error.message());
-         Logger.info("Incorrect values inserted");
-         params.flash();
-         validation.keep();
-         index();
+    validation.range(lng, -180, 180);
+    if (validation.hasErrors()) {
+      for (Error error : validation.errors()) {
+        System.out.println(error.message());
+        Logger.info("Incorrect values inserted");
+        params.flash();
+        validation.keep();
+        index();
       }
     }
     Member member = Accounts.getLoggedInMember();
@@ -65,5 +60,4 @@ public class Dashboard extends Controller {
     station.delete();
     redirect("/dashboard");
   }
-
 }

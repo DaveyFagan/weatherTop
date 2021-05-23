@@ -19,9 +19,8 @@ public class Accounts extends Controller {
     validation.required(lastname);
     validation.required(email);
     validation.required(password);
-    if(validation.hasErrors()) {
-      for(Error error : validation.errors())
-      {
+    if (validation.hasErrors()) {
+      for (Error error : validation.errors()) {
         System.out.println(error.message());
         Logger.info("Incorrect values entered");
         params.flash();
@@ -32,25 +31,23 @@ public class Accounts extends Controller {
     Logger.info("Registering new user " + email);
     Member member = new Member(firstname, lastname, email, password);
     member.save();
-    authenticate(email,password);
+    authenticate(email, password);
   }
 
-  public static void update()
-  {
+  public static void update() {
     render("update.html");
   }
 
-  public static void updateProfile(String firstname, String lastname, String email, String password, Long id)
-  {
+  public static void updateProfile(String firstname, String lastname, String email, String password, Long id) {
     validation.required(firstname);
     validation.required(lastname);
     validation.required(email);
     validation.required(password);
-    if(validation.hasErrors()) {
-       {
-         Logger.info("Incorrect values inserted");
-         params.flash();
-         validation.keep();
+    if (validation.hasErrors()) {
+      {
+        Logger.info("Incorrect values inserted");
+        params.flash();
+        validation.keep();
         update();
       }
     }

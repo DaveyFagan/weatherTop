@@ -5,10 +5,11 @@
  * @Author David Fagan
  */
 package models;
+
 import javax.persistence.Entity;
 
-import org.hibernate.validator.constraints.NotBlank;
 import play.db.jpa.Model;
+
 import java.util.Date;
 
 @Entity
@@ -29,15 +30,13 @@ public class Reading extends Model {
     this.windSpeed = windSpeed;
     this.windDirection = windDirection;
     this.pressure = pressure;
-
   }
 
   public void setCode(int code) {
     this.code = code;
   }
 
-  public int getCode()
-  {
+  public int getCode() {
     return code;
   }
 
@@ -64,7 +63,6 @@ public class Reading extends Model {
   public int getWindDirection() {
     return windDirection;
   }
-
 
   public int getPressure() {
     return pressure;

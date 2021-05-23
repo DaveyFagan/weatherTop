@@ -1,11 +1,13 @@
 /**
- *The member class defines fields to take information
+ * The member class defines fields to take information
  * for each user
  *
  * @Author David Fagan
  */
 package models;
+
 import play.db.jpa.Model;
+
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.OneToMany;
@@ -21,7 +23,7 @@ public class Member extends Model {
   @OneToMany(cascade = CascadeType.ALL)
   public List<Station> stations = new ArrayList<Station>();
 
-  public void setFirstname(String firstname){
+  public void setFirstname(String firstname) {
     this.firstname = firstname;
   }
 
@@ -29,8 +31,7 @@ public class Member extends Model {
     return firstname;
   }
 
-  public void setLastname(String lastname)
-  {
+  public void setLastname(String lastname) {
     this.lastname = lastname;
   }
 
@@ -38,8 +39,7 @@ public class Member extends Model {
     return lastname;
   }
 
-  public void setEmail(String email)
-  {
+  public void setEmail(String email) {
     this.email = email;
   }
 
@@ -47,11 +47,10 @@ public class Member extends Model {
     return email;
   }
 
-  public void setPassword(String password)
-  {
+  public void setPassword(String password) {
     this.password = password;
   }
-  
+
   public String getPassword() {
     return password;
   }

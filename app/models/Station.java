@@ -7,15 +7,14 @@
  */
 
 package models;
+
 import play.db.jpa.Model;
+
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.OneToMany;
 import java.util.ArrayList;
 import java.util.List;
-
-import play.data.validation.Validation;
-
 
 @Entity
 public class Station extends Model {
@@ -25,6 +24,7 @@ public class Station extends Model {
   private double lng;
   @OneToMany(cascade = CascadeType.ALL)
   private List<Reading> readings = new ArrayList<Reading>();
+
   private double latestTemperature;
   private int latestPressure;
   private String latestWeather;
@@ -48,7 +48,6 @@ public class Station extends Model {
     this.setName(name);
     this.setLat(lat);
     this.setLng(lng);
-
   }
 
   public String getThermometerIcon() {
