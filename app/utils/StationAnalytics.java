@@ -17,19 +17,6 @@ public class StationAnalytics {
     weatherIconResponseMap();
   }
 
-  public static Reading getMaxTemperature(List<Reading> readings) {
-    Reading maxTemperature = null;
-    if (readings.size() > 0) {
-      maxTemperature = readings.get(0);
-      for (Reading reading : readings) {
-        if (reading.getTemperature() > maxTemperature.getTemperature()) {
-          maxTemperature = reading;
-        }
-      }
-    }
-    return maxTemperature;
-  }
-
   public static String getTemperatureTrend(List<Reading> readings) {
     if (readings.size() > 0) {
       if (readings.size() > 1) {
@@ -100,6 +87,19 @@ public class StationAnalytics {
       }
     }
     return "large orange minus icon";
+  }
+
+  public static Reading getMaxTemperature(List<Reading> readings) {
+    Reading maxTemperature = null;
+    if (readings.size() > 0) {
+      maxTemperature = readings.get(0);
+      for (Reading reading : readings) {
+        if (reading.getTemperature() > maxTemperature.getTemperature()) {
+          maxTemperature = reading;
+        }
+      }
+    }
+    return maxTemperature;
   }
 
   public static Reading getMinTemperature(List<Reading> readings) {
