@@ -1,5 +1,5 @@
 
-/*
+
 # weatherTop
 
 weatherTop is an application that takes in digitized information from multiple stations and displays them all in one place.
@@ -54,4 +54,4 @@ Multiple accounts can be created. Each account can create stations and readings 
 Multiple accounts can be created. Each account can create stations and readings specific to that users account.
 
 
-*/
+
