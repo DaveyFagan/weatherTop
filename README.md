@@ -2,7 +2,6 @@
 
 # Welcome to my weatherTop Java Assignment
 
-===================================================
 
 weatherTop is an application that takes in digitized information from multiple stations and displays them all in one place.
 
